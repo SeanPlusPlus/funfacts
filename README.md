@@ -1,3 +1,5 @@
-# Simple JSON
+# Fun Facts
 
-https://simplejson.vercel.app/
+Team building game
+
+https://funfacts.vercel.app/
