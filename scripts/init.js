@@ -18,10 +18,13 @@ const {
 } = q
 
 const init = async () => {
-  const init_collection = await client.query(
+  await client.query(
     CreateCollection({ name: "Entries" })
   )
-  const init_index = await client.query(
+  await client.query(
+    CreateCollection({ name: "Tags" })
+  )
+  await client.query(
     CreateIndex({
       name: 'entries_by_id',
       source: Collection("Entries"),
@@ -33,7 +36,18 @@ const init = async () => {
       ]
     })
   )
-  console.log(init_collection, init_index)
+  await client.query(
+    CreateIndex({
+      name: 'entries_by_tag',
+      source: Collection("Entries"),
+      unique: true,
+      terms: [
+        {
+          field: ["data", "tag_name"]
+        }
+      ]
+    })
+  )
 }
 
 init()
