@@ -12,7 +12,6 @@ const client = new faunadb.Client({
 })
 
 const {
-  CreateCollection,
   CreateIndex,
   Collection,
 } = q
@@ -20,12 +19,12 @@ const {
 const init = async () => {
   await client.query(
     CreateIndex({
-      name: 'users_by_game',
-      source: Collection("Users"),
+      name: 'game_by_id',
+      source: Collection("Games"),
       unique: true,
       terms: [
         {
-          field: ["data", "item_id"]
+          field: ["data", "game_id"]
         }
       ]
     })

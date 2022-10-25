@@ -13,8 +13,6 @@ const client = new faunadb.Client({
 
 const {
   CreateCollection,
-  CreateIndex,
-  Collection,
 } = q
 
 const init = async () => {
