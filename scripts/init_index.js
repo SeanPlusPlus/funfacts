@@ -19,19 +19,6 @@ const {
 
 const init = async () => {
   await client.query(
-    CreateCollection({ name: "Users" })
-  )
-  await client.query(
-    CreateCollection({ name: "Facts" })
-  )
-  await client.query(
-    CreateCollection({ name: "Games" })
-  )
-  await client.query(
-    CreateCollection({ name: "Votes" })
-  )
-  
-  await client.query(
     CreateIndex({
       name: 'users_by_game',
       source: Collection("Users"),
@@ -39,18 +26,6 @@ const init = async () => {
       terms: [
         {
           field: ["data", "item_id"]
-        }
-      ]
-    })
-  )
-  await client.query(
-    CreateIndex({
-      name: 'items_by_tag',
-      source: Collection("Items"),
-      unique: true,
-      terms: [
-        {
-          field: ["data", "tag_name"]
         }
       ]
     })
