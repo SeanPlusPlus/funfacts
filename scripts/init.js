@@ -19,27 +19,34 @@ const {
 
 const init = async () => {
   await client.query(
-    CreateCollection({ name: "Entries" })
+    CreateCollection({ name: "Users" })
   )
   await client.query(
-    CreateCollection({ name: "Tags" })
+    CreateCollection({ name: "Facts" })
   )
+  await client.query(
+    CreateCollection({ name: "Games" })
+  )
+  await client.query(
+    CreateCollection({ name: "Votes" })
+  )
+  
   await client.query(
     CreateIndex({
-      name: 'entries_by_id',
-      source: Collection("Entries"),
+      name: 'users_by_game',
+      source: Collection("Users"),
       unique: true,
       terms: [
         {
-          field: ["data", "entry_id"]
+          field: ["data", "item_id"]
         }
       ]
     })
   )
   await client.query(
     CreateIndex({
-      name: 'entries_by_tag',
-      source: Collection("Entries"),
+      name: 'items_by_tag',
+      source: Collection("Items"),
       unique: true,
       terms: [
         {
